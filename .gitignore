@@ -209,3 +209,6 @@ __marimo__/
 *.parquet
 
 ny_taxi_postgres_data/
+
+# Ignore GCP Service Account Keys
+*.json
