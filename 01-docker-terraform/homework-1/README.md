@@ -1,3 +1,7 @@
+Here's the link for all of the questions :
+https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2026/01-docker-terraform/homework.md
+
+Below are the additional solution (SQL or shell commands and not code): 
 # Question 1
 docker run -it --entrypoint=bash python:3.13
 pip --version
