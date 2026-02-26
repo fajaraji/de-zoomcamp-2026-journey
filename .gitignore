@@ -235,3 +235,4 @@ crash.log
 .terraformignore
 .sentinel
 .fuego
+.bruin.yml
