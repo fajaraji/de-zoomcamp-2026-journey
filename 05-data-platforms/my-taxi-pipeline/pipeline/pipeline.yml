@@ -7,7 +7,7 @@
 # - Run command: https://getbruin.com/docs/bruin/commands/run
 
 # TODO: Set a pipeline name (string). This shows up in logs + `BRUIN_PIPELINE` for Python assets.
-name: nyc-taxi-pipeline
+name: nyc-taxi-pipeline-local
 
 # TODO: Pick a schedule ("daily", "hourly", "weekly", "monthly") or a cron string.
 schedule: "daily"
