@@ -100,6 +100,15 @@ def materialize():
         'airport_fee': 'airport_fee'
     }
 
+    # --- PENYAMARAN ULTRA HEADERS ---
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Referer': 'https://www.google.com/',
+        'Connection': 'keep-alive'
+    }
+
     current_date = start_date
     while current_date <= end_date:
         y, m = current_date.year, current_date.month
@@ -110,12 +119,6 @@ def materialize():
 
             try:
                 print(f"Fetching: {url}")
-                
-                
-                headers = {
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
-                }
-                
                 res = requests.get(url, headers=headers, timeout=60)
                 res.raise_for_status()
 
@@ -143,7 +146,6 @@ def materialize():
                         df[col] = None
                 
                 df = df[valid_columns].copy()
-                
                 df['taxi_type'] = t_type
                 df['extracted_at'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
@@ -158,6 +160,6 @@ def materialize():
             current_date = current_date.replace(month=m + 1)
 
     if not all_dfs:
-        raise ValueError("No data found!")
+        raise ValueError("No data found! Check if NYC Taxi server is blocking Bruin Cloud IP.")
 
     return pd.concat(all_dfs, ignore_index=True)
