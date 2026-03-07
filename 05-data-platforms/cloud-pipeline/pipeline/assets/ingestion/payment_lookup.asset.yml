@@ -22,7 +22,7 @@ parameters:
 # - Lookups should have a stable primary key.
 columns:
   - name: payment_type_id
-    type: integer
+    type: int64
     description: "Numeric code for payment type"
     primary_key: true
     checks:
