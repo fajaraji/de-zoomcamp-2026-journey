@@ -100,7 +100,6 @@ def materialize():
         'airport_fee': 'airport_fee'
     }
 
-    # --- PENYAMARAN ULTRA HEADERS ---
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
@@ -127,7 +126,6 @@ def materialize():
                 df.columns = df.columns.str.lower()
                 df = df.rename(columns=column_mapping)
                 
-                # Format waktu menjadi string (teks)
                 if 'pickup_datetime' in df.columns:
                     df['pickup_datetime'] = pd.to_datetime(df['pickup_datetime']).dt.strftime('%Y-%m-%d %H:%M:%S')
                 if 'dropoff_datetime' in df.columns:
