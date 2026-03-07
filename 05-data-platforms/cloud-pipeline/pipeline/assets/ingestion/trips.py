@@ -110,7 +110,13 @@ def materialize():
 
             try:
                 print(f"Fetching: {url}")
-                res = requests.get(url, timeout=60)
+                
+                
+                headers = {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
+                }
+                
+                res = requests.get(url, headers=headers, timeout=60)
                 res.raise_for_status()
 
                 df = pd.read_parquet(BytesIO(res.content))
@@ -118,8 +124,7 @@ def materialize():
                 df.columns = df.columns.str.lower()
                 df = df.rename(columns=column_mapping)
                 
-                # --- JURUS ANTI WINDOWS ERROR ---
-                # Ubah kolom datetime menjadi teks murni (string)
+                # Format waktu menjadi string (teks)
                 if 'pickup_datetime' in df.columns:
                     df['pickup_datetime'] = pd.to_datetime(df['pickup_datetime']).dt.strftime('%Y-%m-%d %H:%M:%S')
                 if 'dropoff_datetime' in df.columns:
@@ -140,7 +145,6 @@ def materialize():
                 df = df[valid_columns].copy()
                 
                 df['taxi_type'] = t_type
-                # Waktu ekstraksi juga diubah jadi string teks
                 df['extracted_at'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
                 all_dfs.append(df)
